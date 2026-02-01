@@ -90,7 +90,7 @@
     const yesBtn = document.getElementById("yes");
     let count = 0;
 
-    // No button runs + Yes grows
+    // No button chaos + Yes grows
     noBtn.addEventListener("mouseover", () => {
       count++;
 
@@ -108,20 +108,22 @@
         const confetti = document.createElement("div");
         confetti.className = "confetti";
         confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.backgroundColor =
+          colors[Math.floor(Math.random() * colors.length)];
         confetti.style.animationDuration = Math.random() * 2 + 2 + "s";
         document.body.appendChild(confetti);
         setTimeout(() => confetti.remove(), 4000);
       }
     }
 
-    // ⏳ Real countdown to Feb 14, 2026 @ 12:00 AM
+    // ⏳ Countdown to Feb 14, 2026 @ 12:00 AM EASTERN TIME (EST = UTC-5)
     function startCountdown() {
-      const targetDate = new Date("February 14, 2026 00:00:00").getTime();
+      // Feb is NOT daylight saving → EST (UTC-5)
+      const targetUTC = Date.UTC(2026, 1, 14, 5, 0, 0); // 12:00 AM ET
 
       function updateCountdown() {
-        const now = new Date().getTime();
-        const diff = targetDate - now;
+        const nowUTC = Date.now();
+        const diff = targetUTC - nowUTC;
 
         if (diff <= 0) {
           document.getElementById("countdown").innerHTML = "IT'S TIME 💖";
@@ -161,7 +163,7 @@
             Get ready for a boatload of surprises,<br>
             starting with our Boston trip in<br><br>
             <strong><span id="countdown"></span></strong> 🥹✈️<br><br>
-            Happy Valentine’s Day + 1 Year ❤️
+            Happy Valentine’s Day - Sotz ❤️
           </p>
         </div>
       `;
